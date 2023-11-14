@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Thermometer } from "lucide-svelte";
-
-	type ColorState = "red" | "blue" | "green" | "orange" | "purple";
+	import type { ColorState } from "./types";
 
 	export let iconColor: string | undefined = undefined;
 	export let bgColor: string | undefined = undefined;
@@ -9,25 +8,25 @@
 	export let colorState: ColorState = "blue";
 
 	if (colorState == "blue") {
-		iconColor = iconColor ?? "rgb(33, 150, 243)";
-		bgColor = bgColor ?? "#1c3243";
-		borderColor = borderColor ?? "#1c3243";
+		iconColor = iconColor ?? "var(--sensor-blue)";
+		bgColor = bgColor ?? "var(--sensor-blue-bg)";
+		borderColor = borderColor ?? "var(--sensor-blue-bg)";
 	} else if (colorState == "red") {
-		iconColor = iconColor ?? "rgb(244, 67, 54)";
-		bgColor = bgColor ?? "#472320";
-		borderColor = borderColor ?? "#472320";
+		iconColor = iconColor ?? "var(--sensor-red)";
+		bgColor = bgColor ?? "var(--sensor-red-bg)";
+		borderColor = borderColor ?? "var(--sensor-red-bg)";
 	} else if (colorState == "green") {
-		iconColor = iconColor ?? "rgb(76, 175, 80)";
-		bgColor = bgColor ?? "#253926";
-		borderColor = borderColor ?? "#253926";
+		iconColor = iconColor ?? "var(--sensor-green)";
+		bgColor = bgColor ?? "var(--sensor-green-bg)";
+		borderColor = borderColor ?? "var(--sensor-green-bg)";
 	} else if (colorState == "orange") {
-		iconColor = iconColor ?? "rgb(255, 152, 0)";
-		bgColor = bgColor ?? "#493416";
-		borderColor = borderColor ?? "#493416";
+		iconColor = iconColor ?? "var(--sensor-orange)";
+		bgColor = bgColor ?? "var(--sensor-orange-bg)";
+		borderColor = borderColor ?? "var(--sensor-orange-bg)";
 	} else if (colorState == "purple") {
-		iconColor = iconColor ?? "rgb(147, 42, 177)";
-		bgColor = bgColor ?? "#2a213b";
-		borderColor = borderColor ?? "#2a213b";
+		iconColor = iconColor ?? "var(--sensor-purple)";
+		bgColor = bgColor ?? "var(--sensor-purple-bg)";
+		borderColor = borderColor ?? "var(--sensor-purple-bg)";
 	}
 </script>
 
