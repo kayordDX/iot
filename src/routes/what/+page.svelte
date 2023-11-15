@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { createKayordIOTFeaturesSensorGetAllEndpoint } from "$lib/api";
+	import { createSensorGetAll } from "$lib/api";
 	import { SensorCard } from "../../components/SensorCard";
-	const query = createKayordIOTFeaturesSensorGetAllEndpoint();
+	const query = createSensorGetAll();
 </script>
 
 {#if $query.isPending}

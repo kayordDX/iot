@@ -17,61 +17,52 @@ import type { InternalErrorResponse } from "./api.schemas";
 import { useCustomClient } from "../mutator/useCustomClient";
 import type { ErrorType } from "../mutator/useCustomClient";
 
-export const useKayordKitApiTestHook = () => {
-	const kayordKitApiTest = useCustomClient<string>();
+export const useApiTestHook = () => {
+	const apiTest = useCustomClient<string>();
 
 	return () => {
-		return kayordKitApiTest({ url: `/test`, method: "get" });
+		return apiTest({ url: `/test`, method: "get" });
 	};
 };
 
-export const getKayordKitApiTestQueryKey = () => {
+export const getApiTestQueryKey = () => {
 	return [`/test`] as const;
 };
 
-export const useKayordKitApiTestQueryOptions = <
-	TData = Awaited<ReturnType<ReturnType<typeof useKayordKitApiTestHook>>>,
+export const useApiTestQueryOptions = <
+	TData = Awaited<ReturnType<ReturnType<typeof useApiTestHook>>>,
 	TError = ErrorType<InternalErrorResponse>,
 >(options?: {
-	query?: CreateQueryOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordKitApiTestHook>>>,
-		TError,
-		TData
-	>;
+	query?: CreateQueryOptions<Awaited<ReturnType<ReturnType<typeof useApiTestHook>>>, TError, TData>;
 }) => {
 	const { query: queryOptions } = options ?? {};
 
-	const queryKey = queryOptions?.queryKey ?? getKayordKitApiTestQueryKey();
+	const queryKey = queryOptions?.queryKey ?? getApiTestQueryKey();
 
-	const kayordKitApiTest = useKayordKitApiTestHook();
+	const apiTest = useApiTestHook();
 
-	const queryFn: QueryFunction<
-		Awaited<ReturnType<ReturnType<typeof useKayordKitApiTestHook>>>
-	> = () => kayordKitApiTest();
+	const queryFn: QueryFunction<Awaited<ReturnType<ReturnType<typeof useApiTestHook>>>> = () =>
+		apiTest();
 
 	return { queryKey, queryFn, ...queryOptions } as CreateQueryOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordKitApiTestHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useApiTestHook>>>,
 		TError,
 		TData
 	> & { queryKey: QueryKey };
 };
 
-export type KayordKitApiTestQueryResult = NonNullable<
-	Awaited<ReturnType<ReturnType<typeof useKayordKitApiTestHook>>>
+export type ApiTestQueryResult = NonNullable<
+	Awaited<ReturnType<ReturnType<typeof useApiTestHook>>>
 >;
-export type KayordKitApiTestQueryError = ErrorType<InternalErrorResponse>;
+export type ApiTestQueryError = ErrorType<InternalErrorResponse>;
 
-export const createKayordKitApiTest = <
-	TData = Awaited<ReturnType<ReturnType<typeof useKayordKitApiTestHook>>>,
+export const createApiTest = <
+	TData = Awaited<ReturnType<ReturnType<typeof useApiTestHook>>>,
 	TError = ErrorType<InternalErrorResponse>,
 >(options?: {
-	query?: CreateQueryOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordKitApiTestHook>>>,
-		TError,
-		TData
-	>;
+	query?: CreateQueryOptions<Awaited<ReturnType<ReturnType<typeof useApiTestHook>>>, TError, TData>;
 }): CreateQueryResult<TData, TError> & { queryKey: QueryKey } => {
-	const queryOptions = useKayordKitApiTestQueryOptions(options);
+	const queryOptions = useApiTestQueryOptions(options);
 
 	const query = createQuery(queryOptions) as CreateQueryResult<TData, TError> & {
 		queryKey: QueryKey;

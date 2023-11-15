@@ -16,7 +16,7 @@
         "tags": [
           "Test"
         ],
-        "operationId": "KayordKitApiTest",
+        "operationId": "ApiTest",
         "responses": {
           "200": {
             "description": "Success",
@@ -75,7 +75,7 @@
         "tags": [
           "Endpoint"
         ],
-        "operationId": "KayordKitApi",
+        "operationId": "Api",
         "responses": {
           "200": {
             "description": "Success",
@@ -105,7 +105,7 @@
         "tags": [
           "Sensorreading"
         ],
-        "operationId": "KayordIOTFeaturesSensorReadingGetAllToday",
+        "operationId": "SensorReadingGetAllToday",
         "responses": {
           "200": {
             "description": "Success",
@@ -138,7 +138,7 @@
         "tags": [
           "Sensor"
         ],
-        "operationId": "KayordIOTFeaturesSensorGetAll",
+        "operationId": "SensorGetAll",
         "responses": {
           "200": {
             "description": "Success",
@@ -169,7 +169,7 @@
         "tags": [
           "Sensor"
         ],
-        "operationId": "KayordIOTFeaturesSensorEdit",
+        "operationId": "SensorEdit",
         "requestBody": {
           "x-name": "Request",
           "description": "",
@@ -221,7 +221,7 @@
         "tags": [
           "Sensor"
         ],
-        "operationId": "KayordIOTFeaturesSensorDelete",
+        "operationId": "SensorDelete",
         "requestBody": {
           "x-name": "Request",
           "description": "",
@@ -278,7 +278,7 @@
         "tags": [
           "Sensor"
         ],
-        "operationId": "KayordIOTFeaturesSensorCreate",
+        "operationId": "SensorCreate",
         "requestBody": {
           "x-name": "Request",
           "description": "",

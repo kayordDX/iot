@@ -25,61 +25,60 @@ import type {
 import { useCustomClient } from "../mutator/useCustomClient";
 import type { ErrorType, BodyType } from "../mutator/useCustomClient";
 
-export const useKayordIOTFeaturesSensorGetAllHook = () => {
-	const kayordIOTFeaturesSensorGetAll = useCustomClient<SensorDto[]>();
+export const useSensorGetAllHook = () => {
+	const sensorGetAll = useCustomClient<SensorDto[]>();
 
 	return () => {
-		return kayordIOTFeaturesSensorGetAll({ url: `/sensor`, method: "get" });
+		return sensorGetAll({ url: `/sensor`, method: "get" });
 	};
 };
 
-export const getKayordIOTFeaturesSensorGetAllQueryKey = () => {
+export const getSensorGetAllQueryKey = () => {
 	return [`/sensor`] as const;
 };
 
-export const useKayordIOTFeaturesSensorGetAllQueryOptions = <
-	TData = Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorGetAllHook>>>,
+export const useSensorGetAllQueryOptions = <
+	TData = Awaited<ReturnType<ReturnType<typeof useSensorGetAllHook>>>,
 	TError = ErrorType<InternalErrorResponse>,
 >(options?: {
 	query?: CreateQueryOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorGetAllHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorGetAllHook>>>,
 		TError,
 		TData
 	>;
 }) => {
 	const { query: queryOptions } = options ?? {};
 
-	const queryKey = queryOptions?.queryKey ?? getKayordIOTFeaturesSensorGetAllQueryKey();
+	const queryKey = queryOptions?.queryKey ?? getSensorGetAllQueryKey();
 
-	const kayordIOTFeaturesSensorGetAll = useKayordIOTFeaturesSensorGetAllHook();
+	const sensorGetAll = useSensorGetAllHook();
 
-	const queryFn: QueryFunction<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorGetAllHook>>>
-	> = () => kayordIOTFeaturesSensorGetAll();
+	const queryFn: QueryFunction<Awaited<ReturnType<ReturnType<typeof useSensorGetAllHook>>>> = () =>
+		sensorGetAll();
 
 	return { queryKey, queryFn, ...queryOptions } as CreateQueryOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorGetAllHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorGetAllHook>>>,
 		TError,
 		TData
 	> & { queryKey: QueryKey };
 };
 
-export type KayordIOTFeaturesSensorGetAllQueryResult = NonNullable<
-	Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorGetAllHook>>>
+export type SensorGetAllQueryResult = NonNullable<
+	Awaited<ReturnType<ReturnType<typeof useSensorGetAllHook>>>
 >;
-export type KayordIOTFeaturesSensorGetAllQueryError = ErrorType<InternalErrorResponse>;
+export type SensorGetAllQueryError = ErrorType<InternalErrorResponse>;
 
-export const createKayordIOTFeaturesSensorGetAll = <
-	TData = Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorGetAllHook>>>,
+export const createSensorGetAll = <
+	TData = Awaited<ReturnType<ReturnType<typeof useSensorGetAllHook>>>,
 	TError = ErrorType<InternalErrorResponse>,
 >(options?: {
 	query?: CreateQueryOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorGetAllHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorGetAllHook>>>,
 		TError,
 		TData
 	>;
 }): CreateQueryResult<TData, TError> & { queryKey: QueryKey } => {
-	const queryOptions = useKayordIOTFeaturesSensorGetAllQueryOptions(options);
+	const queryOptions = useSensorGetAllQueryOptions(options);
 
 	const query = createQuery(queryOptions) as CreateQueryResult<TData, TError> & {
 		queryKey: QueryKey;
@@ -90,11 +89,11 @@ export const createKayordIOTFeaturesSensorGetAll = <
 	return query;
 };
 
-export const useKayordIOTFeaturesSensorEditHook = () => {
-	const kayordIOTFeaturesSensorEdit = useCustomClient<unknown>();
+export const useSensorEditHook = () => {
+	const sensorEdit = useCustomClient<unknown>();
 
 	return (request: BodyType<Request>) => {
-		return kayordIOTFeaturesSensorEdit({
+		return sensorEdit({
 			url: `/sensor`,
 			method: "put",
 			headers: { "Content-Type": "application/json" },
@@ -103,66 +102,64 @@ export const useKayordIOTFeaturesSensorEditHook = () => {
 	};
 };
 
-export const useKayordIOTFeaturesSensorEditMutationOptions = <
+export const useSensorEditMutationOptions = <
 	TError = ErrorType<ErrorResponse | InternalErrorResponse>,
 	TContext = unknown,
 >(options?: {
 	mutation?: CreateMutationOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorEditHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorEditHook>>>,
 		TError,
 		{ data: BodyType<Request> },
 		TContext
 	>;
 }): CreateMutationOptions<
-	Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorEditHook>>>,
+	Awaited<ReturnType<ReturnType<typeof useSensorEditHook>>>,
 	TError,
 	{ data: BodyType<Request> },
 	TContext
 > => {
 	const { mutation: mutationOptions } = options ?? {};
 
-	const kayordIOTFeaturesSensorEdit = useKayordIOTFeaturesSensorEditHook();
+	const sensorEdit = useSensorEditHook();
 
 	const mutationFn: MutationFunction<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorEditHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorEditHook>>>,
 		{ data: BodyType<Request> }
 	> = (props) => {
 		const { data } = props ?? {};
 
-		return kayordIOTFeaturesSensorEdit(data);
+		return sensorEdit(data);
 	};
 
 	return { mutationFn, ...mutationOptions };
 };
 
-export type KayordIOTFeaturesSensorEditMutationResult = NonNullable<
-	Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorEditHook>>>
+export type SensorEditMutationResult = NonNullable<
+	Awaited<ReturnType<ReturnType<typeof useSensorEditHook>>>
 >;
-export type KayordIOTFeaturesSensorEditMutationBody = BodyType<Request>;
-export type KayordIOTFeaturesSensorEditMutationError = ErrorType<
-	ErrorResponse | InternalErrorResponse
->;
+export type SensorEditMutationBody = BodyType<Request>;
+export type SensorEditMutationError = ErrorType<ErrorResponse | InternalErrorResponse>;
 
-export const createKayordIOTFeaturesSensorEdit = <
+export const createSensorEdit = <
 	TError = ErrorType<ErrorResponse | InternalErrorResponse>,
 	TContext = unknown,
 >(options?: {
 	mutation?: CreateMutationOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorEditHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorEditHook>>>,
 		TError,
 		{ data: BodyType<Request> },
 		TContext
 	>;
 }) => {
-	const mutationOptions = useKayordIOTFeaturesSensorEditMutationOptions(options);
+	const mutationOptions = useSensorEditMutationOptions(options);
 
 	return createMutation(mutationOptions);
 };
-export const useKayordIOTFeaturesSensorDeleteHook = () => {
-	const kayordIOTFeaturesSensorDelete = useCustomClient<unknown>();
+export const useSensorDeleteHook = () => {
+	const sensorDelete = useCustomClient<unknown>();
 
 	return (request2: BodyType<Request2>) => {
-		return kayordIOTFeaturesSensorDelete({
+		return sensorDelete({
 			url: `/sensor`,
 			method: "delete",
 			headers: { "Content-Type": "*/*" },
@@ -171,66 +168,64 @@ export const useKayordIOTFeaturesSensorDeleteHook = () => {
 	};
 };
 
-export const useKayordIOTFeaturesSensorDeleteMutationOptions = <
+export const useSensorDeleteMutationOptions = <
 	TError = ErrorType<ErrorResponse | InternalErrorResponse>,
 	TContext = unknown,
 >(options?: {
 	mutation?: CreateMutationOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorDeleteHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorDeleteHook>>>,
 		TError,
 		{ data: BodyType<Request2> },
 		TContext
 	>;
 }): CreateMutationOptions<
-	Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorDeleteHook>>>,
+	Awaited<ReturnType<ReturnType<typeof useSensorDeleteHook>>>,
 	TError,
 	{ data: BodyType<Request2> },
 	TContext
 > => {
 	const { mutation: mutationOptions } = options ?? {};
 
-	const kayordIOTFeaturesSensorDelete = useKayordIOTFeaturesSensorDeleteHook();
+	const sensorDelete = useSensorDeleteHook();
 
 	const mutationFn: MutationFunction<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorDeleteHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorDeleteHook>>>,
 		{ data: BodyType<Request2> }
 	> = (props) => {
 		const { data } = props ?? {};
 
-		return kayordIOTFeaturesSensorDelete(data);
+		return sensorDelete(data);
 	};
 
 	return { mutationFn, ...mutationOptions };
 };
 
-export type KayordIOTFeaturesSensorDeleteMutationResult = NonNullable<
-	Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorDeleteHook>>>
+export type SensorDeleteMutationResult = NonNullable<
+	Awaited<ReturnType<ReturnType<typeof useSensorDeleteHook>>>
 >;
-export type KayordIOTFeaturesSensorDeleteMutationBody = BodyType<Request2>;
-export type KayordIOTFeaturesSensorDeleteMutationError = ErrorType<
-	ErrorResponse | InternalErrorResponse
->;
+export type SensorDeleteMutationBody = BodyType<Request2>;
+export type SensorDeleteMutationError = ErrorType<ErrorResponse | InternalErrorResponse>;
 
-export const createKayordIOTFeaturesSensorDelete = <
+export const createSensorDelete = <
 	TError = ErrorType<ErrorResponse | InternalErrorResponse>,
 	TContext = unknown,
 >(options?: {
 	mutation?: CreateMutationOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorDeleteHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorDeleteHook>>>,
 		TError,
 		{ data: BodyType<Request2> },
 		TContext
 	>;
 }) => {
-	const mutationOptions = useKayordIOTFeaturesSensorDeleteMutationOptions(options);
+	const mutationOptions = useSensorDeleteMutationOptions(options);
 
 	return createMutation(mutationOptions);
 };
-export const useKayordIOTFeaturesSensorCreateHook = () => {
-	const kayordIOTFeaturesSensorCreate = useCustomClient<Sensor>();
+export const useSensorCreateHook = () => {
+	const sensorCreate = useCustomClient<Sensor>();
 
 	return (request3: BodyType<Request3>) => {
-		return kayordIOTFeaturesSensorCreate({
+		return sensorCreate({
 			url: `/sensor`,
 			method: "post",
 			headers: { "Content-Type": "application/json" },
@@ -239,58 +234,56 @@ export const useKayordIOTFeaturesSensorCreateHook = () => {
 	};
 };
 
-export const useKayordIOTFeaturesSensorCreateMutationOptions = <
+export const useSensorCreateMutationOptions = <
 	TError = ErrorType<ErrorResponse | InternalErrorResponse>,
 	TContext = unknown,
 >(options?: {
 	mutation?: CreateMutationOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorCreateHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorCreateHook>>>,
 		TError,
 		{ data: BodyType<Request3> },
 		TContext
 	>;
 }): CreateMutationOptions<
-	Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorCreateHook>>>,
+	Awaited<ReturnType<ReturnType<typeof useSensorCreateHook>>>,
 	TError,
 	{ data: BodyType<Request3> },
 	TContext
 > => {
 	const { mutation: mutationOptions } = options ?? {};
 
-	const kayordIOTFeaturesSensorCreate = useKayordIOTFeaturesSensorCreateHook();
+	const sensorCreate = useSensorCreateHook();
 
 	const mutationFn: MutationFunction<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorCreateHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorCreateHook>>>,
 		{ data: BodyType<Request3> }
 	> = (props) => {
 		const { data } = props ?? {};
 
-		return kayordIOTFeaturesSensorCreate(data);
+		return sensorCreate(data);
 	};
 
 	return { mutationFn, ...mutationOptions };
 };
 
-export type KayordIOTFeaturesSensorCreateMutationResult = NonNullable<
-	Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorCreateHook>>>
+export type SensorCreateMutationResult = NonNullable<
+	Awaited<ReturnType<ReturnType<typeof useSensorCreateHook>>>
 >;
-export type KayordIOTFeaturesSensorCreateMutationBody = BodyType<Request3>;
-export type KayordIOTFeaturesSensorCreateMutationError = ErrorType<
-	ErrorResponse | InternalErrorResponse
->;
+export type SensorCreateMutationBody = BodyType<Request3>;
+export type SensorCreateMutationError = ErrorType<ErrorResponse | InternalErrorResponse>;
 
-export const createKayordIOTFeaturesSensorCreate = <
+export const createSensorCreate = <
 	TError = ErrorType<ErrorResponse | InternalErrorResponse>,
 	TContext = unknown,
 >(options?: {
 	mutation?: CreateMutationOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorCreateHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorCreateHook>>>,
 		TError,
 		{ data: BodyType<Request3> },
 		TContext
 	>;
 }) => {
-	const mutationOptions = useKayordIOTFeaturesSensorCreateMutationOptions(options);
+	const mutationOptions = useSensorCreateMutationOptions(options);
 
 	return createMutation(mutationOptions);
 };

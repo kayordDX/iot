@@ -10,64 +10,62 @@ import type { InternalErrorResponse, Response } from "./api.schemas";
 import { useCustomClient } from "../mutator/useCustomClient";
 import type { ErrorType } from "../mutator/useCustomClient";
 
-export const useKayordKitApiHook = () => {
-	const kayordKitApi = useCustomClient<Response>();
+export const useApiHook = () => {
+	const api = useCustomClient<Response>();
 
 	return () => {
-		return kayordKitApi({ url: `/endpoint`, method: "post" });
+		return api({ url: `/endpoint`, method: "post" });
 	};
 };
 
-export const useKayordKitApiMutationOptions = <
+export const useApiMutationOptions = <
 	TError = ErrorType<InternalErrorResponse>,
 	TVariables = void,
 	TContext = unknown,
 >(options?: {
 	mutation?: CreateMutationOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordKitApiHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useApiHook>>>,
 		TError,
 		TVariables,
 		TContext
 	>;
 }): CreateMutationOptions<
-	Awaited<ReturnType<ReturnType<typeof useKayordKitApiHook>>>,
+	Awaited<ReturnType<ReturnType<typeof useApiHook>>>,
 	TError,
 	TVariables,
 	TContext
 > => {
 	const { mutation: mutationOptions } = options ?? {};
 
-	const kayordKitApi = useKayordKitApiHook();
+	const api = useApiHook();
 
 	const mutationFn: MutationFunction<
-		Awaited<ReturnType<ReturnType<typeof useKayordKitApiHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useApiHook>>>,
 		TVariables
 	> = () => {
-		return kayordKitApi();
+		return api();
 	};
 
 	return { mutationFn, ...mutationOptions };
 };
 
-export type KayordKitApiMutationResult = NonNullable<
-	Awaited<ReturnType<ReturnType<typeof useKayordKitApiHook>>>
->;
+export type ApiMutationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof useApiHook>>>>;
 
-export type KayordKitApiMutationError = ErrorType<InternalErrorResponse>;
+export type ApiMutationError = ErrorType<InternalErrorResponse>;
 
-export const createKayordKitApi = <
+export const createApi = <
 	TError = ErrorType<InternalErrorResponse>,
 	TVariables = void,
 	TContext = unknown,
 >(options?: {
 	mutation?: CreateMutationOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordKitApiHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useApiHook>>>,
 		TError,
 		TVariables,
 		TContext
 	>;
 }) => {
-	const mutationOptions = useKayordKitApiMutationOptions(options);
+	const mutationOptions = useApiMutationOptions(options);
 
 	return createMutation(mutationOptions);
 };

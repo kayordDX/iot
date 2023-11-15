@@ -15,62 +15,61 @@ import type { InternalErrorResponse, SensorReading } from "./api.schemas";
 import { useCustomClient } from "../mutator/useCustomClient";
 import type { ErrorType } from "../mutator/useCustomClient";
 
-export const useKayordIOTFeaturesSensorReadingGetAllTodayHook = () => {
-	const kayordIOTFeaturesSensorReadingGetAllToday = useCustomClient<SensorReading[]>();
+export const useSensorReadingGetAllTodayHook = () => {
+	const sensorReadingGetAllToday = useCustomClient<SensorReading[]>();
 
 	return () => {
-		return kayordIOTFeaturesSensorReadingGetAllToday({ url: `/sensorReading`, method: "get" });
+		return sensorReadingGetAllToday({ url: `/sensorReading`, method: "get" });
 	};
 };
 
-export const getKayordIOTFeaturesSensorReadingGetAllTodayQueryKey = () => {
+export const getSensorReadingGetAllTodayQueryKey = () => {
 	return [`/sensorReading`] as const;
 };
 
-export const useKayordIOTFeaturesSensorReadingGetAllTodayQueryOptions = <
-	TData = Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorReadingGetAllTodayHook>>>,
+export const useSensorReadingGetAllTodayQueryOptions = <
+	TData = Awaited<ReturnType<ReturnType<typeof useSensorReadingGetAllTodayHook>>>,
 	TError = ErrorType<InternalErrorResponse>,
 >(options?: {
 	query?: CreateQueryOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorReadingGetAllTodayHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorReadingGetAllTodayHook>>>,
 		TError,
 		TData
 	>;
 }) => {
 	const { query: queryOptions } = options ?? {};
 
-	const queryKey = queryOptions?.queryKey ?? getKayordIOTFeaturesSensorReadingGetAllTodayQueryKey();
+	const queryKey = queryOptions?.queryKey ?? getSensorReadingGetAllTodayQueryKey();
 
-	const kayordIOTFeaturesSensorReadingGetAllToday =
-		useKayordIOTFeaturesSensorReadingGetAllTodayHook();
+	const sensorReadingGetAllToday = useSensorReadingGetAllTodayHook();
 
 	const queryFn: QueryFunction<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorReadingGetAllTodayHook>>>
-	> = () => kayordIOTFeaturesSensorReadingGetAllToday();
+		Awaited<ReturnType<ReturnType<typeof useSensorReadingGetAllTodayHook>>>
+	> = () => sensorReadingGetAllToday();
 
 	return { queryKey, queryFn, ...queryOptions } as CreateQueryOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorReadingGetAllTodayHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorReadingGetAllTodayHook>>>,
 		TError,
 		TData
 	> & { queryKey: QueryKey };
 };
 
-export type KayordIOTFeaturesSensorReadingGetAllTodayQueryResult = NonNullable<
-	Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorReadingGetAllTodayHook>>>
+export type SensorReadingGetAllTodayQueryResult = NonNullable<
+	Awaited<ReturnType<ReturnType<typeof useSensorReadingGetAllTodayHook>>>
 >;
-export type KayordIOTFeaturesSensorReadingGetAllTodayQueryError = ErrorType<InternalErrorResponse>;
+export type SensorReadingGetAllTodayQueryError = ErrorType<InternalErrorResponse>;
 
-export const createKayordIOTFeaturesSensorReadingGetAllToday = <
-	TData = Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorReadingGetAllTodayHook>>>,
+export const createSensorReadingGetAllToday = <
+	TData = Awaited<ReturnType<ReturnType<typeof useSensorReadingGetAllTodayHook>>>,
 	TError = ErrorType<InternalErrorResponse>,
 >(options?: {
 	query?: CreateQueryOptions<
-		Awaited<ReturnType<ReturnType<typeof useKayordIOTFeaturesSensorReadingGetAllTodayHook>>>,
+		Awaited<ReturnType<ReturnType<typeof useSensorReadingGetAllTodayHook>>>,
 		TError,
 		TData
 	>;
 }): CreateQueryResult<TData, TError> & { queryKey: QueryKey } => {
-	const queryOptions = useKayordIOTFeaturesSensorReadingGetAllTodayQueryOptions(options);
+	const queryOptions = useSensorReadingGetAllTodayQueryOptions(options);
 
 	const query = createQuery(queryOptions) as CreateQueryResult<TData, TError> & {
 		queryKey: QueryKey;
