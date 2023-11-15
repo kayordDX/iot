@@ -10,7 +10,7 @@
 		<SensorCard
 			value={item.state.toString()}
 			name={item.name ?? item.topic}
-			badge={item.lastUpdated.toString()}
+			badge={item.lastUpdatedString}
 		/>
 	{/each}
 </div>

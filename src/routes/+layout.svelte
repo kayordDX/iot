@@ -1,6 +1,16 @@
 <script>
 	import { ModeWatcher, ThemeSwitch } from "@kayord/ui";
+	import { browser } from "$app/environment";
+	import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
 	import "../app.postcss";
+
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				enabled: browser,
+			},
+		},
+	});
 </script>
 
 <ModeWatcher />
@@ -12,4 +22,6 @@
 	<ThemeSwitch class="text-secondary-foreground" />
 </div>
 
-<slot />
+<QueryClientProvider client={queryClient}>
+	<slot />
+</QueryClientProvider>

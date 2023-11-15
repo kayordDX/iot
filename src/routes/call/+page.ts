@@ -6,6 +6,7 @@ interface Sensor {
 	name?: string;
 	state: number;
 	lastUpdated: Date;
+	lastUpdatedString: string;
 }
 
 export const load = (async ({ fetch }) => {
